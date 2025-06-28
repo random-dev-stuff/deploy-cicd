@@ -26,10 +26,10 @@ jobs:
       - name: Deploy things
         run: |
           git pull origin main
-          ls
+          ls 
+          pwd
           npm install -g pnpm
           pnpm install 
-          npx prisma generate
           pnpm run build 
           pm2 restart fe-server
           pm2 restart http-server
