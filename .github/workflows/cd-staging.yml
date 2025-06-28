@@ -23,3 +23,13 @@ jobs:
           chmod 600 ~/.ssh/deploy_key
           echo -e "Host ec2\n\tHostName $SSH_HOST\n\tUser $SSH_USER\n\tIdentityFile ~/.ssh/deploy_key\n\tStrictHostKeyChecking no" > ~/.ssh/config
 
+      - name: Deploy things
+        run: |
+          cd deploy-cicd/ 
+          git pull origin main
+          npm install -g pnpm
+          pnpm install 
+          pnpm run build 
+          pm2 restart fe-server
+          pm2 restart http-server
+          pm2 restart ws-server
