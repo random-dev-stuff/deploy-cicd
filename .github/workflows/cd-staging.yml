@@ -26,6 +26,7 @@ jobs:
       - name: Deploy things
         run: |
           git pull origin main
+          cd deploy-cicd
           npm install -g pnpm
           pnpm install 
           pnpm run build 
