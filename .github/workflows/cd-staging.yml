@@ -29,6 +29,7 @@ jobs:
           ls
           npm install -g pnpm
           pnpm install 
+          npx prisma generate
           pnpm run build 
           pm2 restart fe-server
           pm2 restart http-server
