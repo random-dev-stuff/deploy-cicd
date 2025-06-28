@@ -10,7 +10,7 @@ jobs:
     name: Deploying everything to the staging cluster
     steps:
       - run: |
-          echo ${{ secrets.SSH_PRIVATE_KEY }} &> ~/ssh_key
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" &> ~/ssh_key
           ssh -i ~/ssh_key ubuntu@13.222.27.56
           cd deploy-cicd/ && git pull
           pnpm install 
