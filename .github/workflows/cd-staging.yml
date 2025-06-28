@@ -1,0 +1,21 @@
+---
+name: Deploy to Staging
+on:
+  push:
+    branches:
+      - main
+jobs:
+  redeploy:
+    name: Deploying everything to the staging cluster
+    
+    steps:
+      - name: SSH into server`
+      - run: |
+          echo ${{ secrets.SSH_PRIVATE_KEY }} &> ~/ssh_key
+          ssh -i ~/ssh_key ubuntu@13.222.27.56
+          cd deploy-cicd/ && git pull
+          pnpm install 
+          pnpm run build
+          pm2 restart fe-server
+          pm2 restart http-server
+          pm2 restart ws-server
